@@ -1,3 +1,11 @@
+# MyNotes
+
+> **Private, local-first meeting notes for macOS.** Record mic + system audio, watch live transcription, type your own notes, and turn notes + transcript into editable summaries, decisions and action items — with no invented owners or deadlines. Searchable history and Markdown export. Everything runs on-device by default.
+>
+> MyNotes is a customized build of [Meetily](https://github.com/Zackriya-Solutions/meetily) by Zackriya Solutions (MIT). See **[MYNOTES.md](MYNOTES.md)** for what changed, how to build and how to launch. The original Meetily README follows.
+
+---
+
 <div align="center" style="border-bottom: none">
     <h1>
         <img src="docs/Meetily-6.png" style="border-radius: 10px;" />
