@@ -11,6 +11,7 @@ import { StatusOverlays } from '@/app/_components/StatusOverlays';
 import Analytics from '@/lib/analytics';
 import { SettingsModals } from './_components/SettingsModal';
 import { TranscriptPanel } from './_components/TranscriptPanel';
+import { LiveNotesPanel } from '@/components/MyNotes/LiveNotesPanel';
 import { useModalState } from '@/hooks/useModalState';
 import { useRecordingStateSync } from '@/hooks/useRecordingStateSync';
 import { useRecordingStart } from '@/hooks/useRecordingStart';
@@ -212,6 +213,7 @@ export default function Home() {
           isStopping={isStopping}
           showModal={showModal}
         />
+        <LiveNotesPanel />
 
         {/* Recording controls - only show when permissions are granted or already recording and not showing status messages */}
         {(hasMicrophone || isRecording) &&
@@ -221,7 +223,8 @@ export default function Home() {
               <div
                 className="flex justify-center pl-8 transition-[margin] duration-300"
                 style={{
-                  marginLeft: sidebarCollapsed ? '4rem' : '16rem'
+                  marginLeft: sidebarCollapsed ? '4rem' : '16rem',
+                  marginRight: 'clamp(300px, 38vw, 520px)'
                 }}
               >
                 <div className="w-2/3 max-w-[750px] flex justify-center">

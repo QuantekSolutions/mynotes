@@ -1,22 +1,27 @@
 {
   "name": "Standard Meeting Notes",
-  "description": "A standard template for general meetings, focusing on key outcomes and actions.",
+  "description": "Summary, decisions, action items and open questions, combining your notes with the transcript.",
   "sections": [
     {
       "title": "Summary",
-      "instruction": "Provide a brief, one-paragraph executive summary of the entire meeting.",
+      "instruction": "Provide a brief, one-paragraph executive summary of the meeting, giving priority to the points captured in the user's notes.",
       "format": "paragraph"
     },
     {
       "title": "Key Decisions",
-      "instruction": "List the most important decisions made during the meeting.",
+      "instruction": "List only decisions that were explicitly agreed in the transcript or recorded in the user's notes. Do not turn proposals or opinions into decisions.",
       "format": "list"
     },
     {
       "title": "Action Items",
-      "instruction": "List all assigned tasks with their owners and due date. Always add reference transcript segment and timestamp in the table.",
+      "instruction": "List each task that someone committed to. Owner: only a person explicitly named as responsible in the source, otherwise \"Unassigned\". Due: only a date or time explicitly stated in the source, otherwise \"Not specified\". Include the supporting transcript quote or note and its timestamp when available.",
       "format": "list",
-      "item_format": "| **Owner** | Task | Due | Reference Transcript Segment | Segment Time stamp |\n| --- | --- | --- | --- | --- |"
+      "item_format": "| **Owner** | Task | Due | Source (quote or note) | Timestamp |\n| --- | --- | --- | --- | --- |"
+    },
+    {
+      "title": "Open Questions",
+      "instruction": "List questions raised that were not resolved during the meeting.",
+      "format": "list"
     },
     {
       "title": "Discussion Highlights",

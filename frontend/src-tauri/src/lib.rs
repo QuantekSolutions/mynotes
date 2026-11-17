@@ -42,6 +42,9 @@ pub mod audio;
 pub mod config;
 pub mod console_utils;
 pub mod database;
+pub mod mynotes;
+#[cfg(test)]
+mod mynotes_e2e;
 pub mod doodle;
 pub mod notifications;
 pub mod ollama;
@@ -835,6 +838,10 @@ pub fn run() {
             groq::groq::get_groq_models,
             api::api_get_meetings,
             api::api_search_transcripts,
+            mynotes::mynotes_get_notes,
+            mynotes::mynotes_save_notes,
+            mynotes::mynotes_meeting_markdown,
+            mynotes::mynotes_export_markdown,
             api::api_get_profile,
             api::api_save_profile,
             api::api_update_profile,

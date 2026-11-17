@@ -8,6 +8,7 @@ import { invoke } from '@tauri-apps/api/core';
 import { toast } from 'sonner';
 import { TranscriptPanel } from '@/components/MeetingDetails/TranscriptPanel';
 import { SummaryPanel } from '@/components/MeetingDetails/SummaryPanel';
+import { MeetingNotesCard } from '@/components/MyNotes/MeetingNotesCard';
 import { MeetingDetailsSplitView, type MeetingDetailsTab } from '@/components/MeetingDetails/MeetingDetailsSplitView';
 import { ModelConfig } from '@/components/ModelSettingsModal';
 
@@ -221,6 +222,13 @@ export default function PageContent({
             />
           }
           summary={
+            <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
+            <MeetingNotesCard
+              meetingId={meeting.id}
+              flushPendingEdits={async () => {
+                if (meetingData.isSummaryDirty) await meetingData.saveAllChanges();
+              }}
+            />
             <SummaryPanel
               meeting={meeting}
               meetingTitle={meetingData.meetingTitle}
@@ -250,6 +258,7 @@ export default function PageContent({
               isModelConfigLoading={isModelConfigLoading}
               onOpenModelSettings={handleRegisterModalOpen}
             />
+            </div>
           }
         />
       </div>

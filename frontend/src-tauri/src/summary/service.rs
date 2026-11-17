@@ -505,9 +505,23 @@ impl SummaryService {
         };
         let template_fingerprint = template_cache_fingerprint(&template);
 
+        // MyNotes: include the notes the user typed during the meeting.
+        let user_notes = match crate::mynotes::load_notes(&pool, &meeting_id).await {
+            Ok(notes) => notes.unwrap_or_default(),
+            Err(e) => {
+                warn!("Could not load user notes for meeting_id={}: {}", meeting_id, e);
+                String::new()
+            }
+        };
+        if !user_notes.is_empty() {
+            info!("📝 Including {} chars of user notes in summary", user_notes.len());
+        }
+        // Notes change the output, so they are part of the cache key.
+        let cache_prompt_key = format!("{custom_prompt}\u{0}{user_notes}");
+
         let cache_source = build_summary_cache_source(
             &text,
-            &custom_prompt,
+            &cache_prompt_key,
             &template_id,
             &template_fingerprint,
             token_threshold,
@@ -555,6 +569,7 @@ impl SummaryService {
             &final_api_key,
             &text,
             &custom_prompt,
+            &user_notes,
             &template_id,
             &template,
             token_threshold,

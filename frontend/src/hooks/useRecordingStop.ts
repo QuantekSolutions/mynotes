@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
+import { attachLiveNotesToMeeting } from '@/lib/liveNotes';
 import { useRouter } from 'next/navigation';
 import { listen } from '@tauri-apps/api/event';
 import { toast } from 'sonner';
@@ -287,6 +288,16 @@ export function useRecordingStop(
                 description: 'The meeting was saved, but Auto could not detect the summary language.',
               });
             }
+          }
+
+          // MyNotes: attach notes typed during the meeting before navigating away.
+          try {
+            await attachLiveNotesToMeeting(meetingId);
+          } catch (error) {
+            console.warn('Failed to attach live notes to meeting:', error);
+            toast.warning('Your notes were not attached', {
+              description: 'They are still in the notes pane; copy them into the meeting manually.',
+            });
           }
 
           console.log('✅ Successfully saved COMPLETE meeting with ID:', meetingId);
